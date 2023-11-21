@@ -15,7 +15,7 @@ function SortableItem({i, todo, handleChecked, handleDelete}) {
             <div className="list-container">
                 <div>
                     <input className="check-box" onChange={() => handleChecked(todo)} checked={todo.checked} type="checkbox"/>
-                    <span>{todo.txt}</span>
+                    <span className={todo.checked ? "checked" : ""}>{todo.txt}</span>
                 </div>
                 <button className="delete-btn" onMouseDown={(e) => {handleDelete(todo.id, i); console.log("functioning")}}><img src="/images/icon-cross.svg"/></button>
             </div>
