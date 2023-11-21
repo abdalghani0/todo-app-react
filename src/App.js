@@ -12,7 +12,7 @@ function App() {
 
   return (
     <main className="App">
-      <img className="background" src = "/images/bg-desktop-light.jpg"/>
+      <img className="background" src="./images/bg-desktop-light.jpg"/>
       <Todo 
         todos={todos}
         setTodos={setTodos}
@@ -31,7 +31,7 @@ function App() {
 function Todo({todos, setTodos, todoText, setTodoText, category, setCategory}) {
   const empty = 
     <div className="empty">
-      <img width="50%" src="images/take-a-bath-svgrepo-com.svg"/>
+      <img width="50%" src="./images/take-a-bath-svgrepo-com.svg"/>
       <p>No Todos Yet</p>
     </div>;
 
