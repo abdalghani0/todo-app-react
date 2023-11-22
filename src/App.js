@@ -94,23 +94,16 @@ function Todo({todos, setTodos, todoText, setTodoText, category, setCategory}) {
   }
 
   function handleCategory(el) {
-    if(el.innerHTML === "all") {
-      el.style.color = "#3a7bfd";
-      setCategory("all");
-      document.getElementById("active").style.color = "#777a92";
-      document.getElementById("completed").style.color = "#777a92";
-    }
-    else if(el.innerHTML === "active") {
-      el.style.color = "#3a7bfd";
-      setCategory("active");
-      document.getElementById("all").style.color = "#777a92";
-      document.getElementById("completed").style.color = "#777a92";
-    }
-    else if(el.innerHTML === "completed") {
-      el.style.color = "#3a7bfd";
-      setCategory("completed");
-      document.getElementById("all").style.color = "#777a92";
-      document.getElementById("active").style.color = "#777a92";
+    const filters = document.getElementsByClassName("filter");
+    console.log(filters);
+    for(let i = 0 ; i < filters.length ; i++){
+      let f = filters[i];
+      if(f.innerHTML === el.innerHTML){
+        f.style.color = "#3a7bfd";
+        setCategory(f.innerHTML);
+      }
+      else
+        f.style.color = "#777a92";
     }
   }
 
@@ -145,10 +138,10 @@ function Todo({todos, setTodos, todoText, setTodoText, category, setCategory}) {
           <li className="todos-filter">
             <span>{todos.length} todos left</span>
 
-            <ul style={{cursor: "pointer"}}>
-              <li onClick={(e) => handleCategory(e.target)} style={{color: "#3a7bfd"}} id="all">all</li>
-              <li onClick={(e) => handleCategory(e.target)} id="active">active</li>
-              <li onClick={(e) => handleCategory(e.target)} id="completed">completed</li>
+            <ul className="filters">
+              <li onClick={(e) => handleCategory(e.target)} style={{color: "#3a7bfd"}} className="filter">all</li>
+              <li onClick={(e) => handleCategory(e.target)} className="filter">active</li>
+              <li onClick={(e) => handleCategory(e.target)} className="filter">completed</li>
             </ul>
 
             <span style={{cursor: "pointer"}} onClick={() => clearCompleted()}>clear completed</span>
@@ -156,6 +149,12 @@ function Todo({todos, setTodos, todoText, setTodoText, category, setCategory}) {
         </ul>
     
       </div>
+
+      <ul className="filters mobile">
+        <li onClick={(e) => handleCategory(e.target)} style={{color: "#3a7bfd"}} className="filter">all</li>
+        <li onClick={(e) => handleCategory(e.target)} className="filter">active</li>
+        <li onClick={(e) => handleCategory(e.target)} className="filter">completed</li>
+      </ul>
 
       <p className="drag">drag and drop to reorder list</p>
 

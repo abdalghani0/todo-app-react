@@ -132,9 +132,22 @@ h2 {
   padding: 1rem 0.7rem;
 }
 
-.todos-filter ul {
+.filters {
   display: flex;
+  cursor: pointer;
   gap: 1rem;
+}
+
+.filters li:hover {
+  color: hsl(235, 21%, 11%);
+}
+
+.filters.mobile {
+  display: none;
+  width: 100%;
+  background-color: white;
+  border-radius: 0.4rem;
+  padding: 0.7rem 0;
 }
 
 .list-item{ 
@@ -237,6 +250,17 @@ h2 {
   }
   input {
     font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .filters {
+    display: none;
+  }
+  .filters.mobile {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
   }
 }
 
