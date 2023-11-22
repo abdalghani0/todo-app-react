@@ -268,3 +268,7 @@ h2 {
   color: #777a92;
   text-decoration: line-through;
 }
+
+.selected-filter {
+  color: #3a7bfd;
+}

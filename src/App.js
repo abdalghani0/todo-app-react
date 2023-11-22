@@ -5,10 +5,20 @@ import { arrayMoveImmutable } from 'array-move';
 
 function App() {
   const [todos, setTodos] = useState([]);
-  const [activeTodos, setActiveTodos] = useState({});
-  const [doneTodos, setDoneTodos] = useState({});
   const [todoText, setTodoText] = useState("");
   const [category, setCategory] = useState("all");
+
+  useEffect(() => {
+    let t = localStorage.getItem("todos");
+    let todosParsed = JSON.parse(t);
+    if(todosParsed !== null && todosParsed.length > 0) setTodos(todosParsed);
+    console.log(todosParsed, todos);
+  }, []);
+
+  useEffect(() => {
+    let todosStringified = JSON.stringify(todos);
+    localStorage.setItem("todos", todosStringified);
+  }, [todos]);
 
   return (
     <main className="App">
@@ -18,10 +28,6 @@ function App() {
         setTodos={setTodos}
         todoText={todoText} 
         setTodoText={setTodoText}
-        activeTodos={activeTodos}
-        setActiveTodos={setActiveTodos}
-        doneTodos={doneTodos}
-        setDoneTodos={setDoneTodos} 
         category={category}
         setCategory={setCategory} />
     </main>
@@ -99,11 +105,11 @@ function Todo({todos, setTodos, todoText, setTodoText, category, setCategory}) {
     for(let i = 0 ; i < filters.length ; i++){
       let f = filters[i];
       if(f.innerHTML === el.innerHTML){
-        f.style.color = "#3a7bfd";
+        f.classList.add("selected-filter");
         setCategory(f.innerHTML);
       }
       else
-        f.style.color = "#777a92";
+        f.classList.remove("selected-filter");
     }
   }
 
@@ -139,7 +145,7 @@ function Todo({todos, setTodos, todoText, setTodoText, category, setCategory}) {
             <span>{todos.length} todos left</span>
 
             <ul className="filters">
-              <li onClick={(e) => handleCategory(e.target)} style={{color: "#3a7bfd"}} className="filter">all</li>
+              <li onClick={(e) => handleCategory(e.target)} className="filter selected-filter">all</li>
               <li onClick={(e) => handleCategory(e.target)} className="filter">active</li>
               <li onClick={(e) => handleCategory(e.target)} className="filter">completed</li>
             </ul>
@@ -151,7 +157,7 @@ function Todo({todos, setTodos, todoText, setTodoText, category, setCategory}) {
       </div>
 
       <ul className="filters mobile">
-        <li onClick={(e) => handleCategory(e.target)} style={{color: "#3a7bfd"}} className="filter">all</li>
+        <li onClick={(e) => handleCategory(e.target)} className="filter selected-filter">all</li>
         <li onClick={(e) => handleCategory(e.target)} className="filter">active</li>
         <li onClick={(e) => handleCategory(e.target)} className="filter">completed</li>
       </ul>
