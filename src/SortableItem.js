@@ -4,6 +4,8 @@ import { SortableElement } from 'react-sortable-hoc';
 
 function SortableItem({i, todo, handleChecked, handleDelete}) {
     
+    //here we add a class to the element when it first mounts to add animation
+    //then remove the class after the animation is done.
     useEffect(() => {
         let el = document.getElementById(i);
         el.classList.add("active");

@@ -2,15 +2,16 @@ import React from 'react';
 import SortableItem from './SortableItem';
 import { SortableContainer } from 'react-sortable-hoc';
  
-function SortableList({todos, handleChecked, handleDelete, category}) {
+function SortableList({todos, handleChecked, handleDelete, filter }) {
   return (
-    <ul>
+    <ul style={{cursor: "grab"}}>
       {
+        //here we map only the todos satisfy the filter.
         todos.map((todo, index) => {
-          if(category === "all") {
+          if(filter  === "all") {
             return <SortableItem key={`item-${index}`} i={index} index={index} todo={todo} handleChecked={handleChecked} handleDelete={handleDelete} />
           }
-          else if(category === "active"){
+          else if(filter  === "active"){
             if(!todo.checked)
               return <SortableItem key={`item-${index}`} i={index} index={index} todo={todo} handleChecked={handleChecked} handleDelete={handleDelete} />
           }

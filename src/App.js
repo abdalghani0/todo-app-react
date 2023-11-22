@@ -6,8 +6,15 @@ import { arrayMoveImmutable } from 'array-move';
 function App() {
   const [todos, setTodos] = useState([]);
   const [todoText, setTodoText] = useState("");
-  const [category, setCategory] = useState("all");
+  const [filter, setFilter] = useState("all");
 
+  //save todos state array in localStorage.
+  useEffect(() => {
+    let todosStringified = JSON.stringify(todos);
+    localStorage.setItem("todos", todosStringified);
+  }, [todos]);
+
+  //retrieve todos from the last session.
   useEffect(() => {
     let t = localStorage.getItem("todos");
     let todosParsed = JSON.parse(t);
@@ -15,26 +22,21 @@ function App() {
     console.log(todosParsed, todos);
   }, []);
 
-  useEffect(() => {
-    let todosStringified = JSON.stringify(todos);
-    localStorage.setItem("todos", todosStringified);
-  }, [todos]);
-
   return (
-    <main className="App">
+    <main className="app">
       <img className="background" src="./images/bg-desktop-light.jpg"/>
       <Todo 
         todos={todos}
         setTodos={setTodos}
         todoText={todoText} 
         setTodoText={setTodoText}
-        category={category}
-        setCategory={setCategory} />
+        filter ={filter }
+        setFilter={setFilter} />
     </main>
   );
 }
 
-function Todo({todos, setTodos, todoText, setTodoText, category, setCategory}) {
+function Todo({todos, setTodos, todoText, setTodoText, filter , setFilter}) {
   const empty = 
     <div className="empty">
       <img width="50%" src="./images/take-a-bath-svgrepo-com.svg"/>
@@ -81,11 +83,12 @@ function Todo({todos, setTodos, todoText, setTodoText, category, setCategory}) {
   }
   
   function clearCompleted() {
+    //here we look for completed todos and then give the class deleted to add some animation
+    //then remove the class(deleted) and filter the list after the animations are done.
     todos.forEach((todo, index) => {
       if(todo.checked){
         const el = document.getElementById(index);
         console.log(el);
-        el.style.animation = "none";
         el.classList.add("deleted");
         setTimeout(() => {
         el.classList.remove("deleted");
@@ -99,20 +102,21 @@ function Todo({todos, setTodos, todoText, setTodoText, category, setCategory}) {
     }, 500)
   }
 
-  function handleCategory(el) {
+  function handleChosenFilter(el) {
     const filters = document.getElementsByClassName("filter");
     console.log(filters);
     for(let i = 0 ; i < filters.length ; i++){
       let f = filters[i];
       if(f.innerHTML === el.innerHTML){
         f.classList.add("selected-filter");
-        setCategory(f.innerHTML);
+        setFilter(f.innerHTML);
       }
       else
         f.classList.remove("selected-filter");
     }
   }
 
+  //function to handle sorting the dnd list levarging the array move libraray
   function onSortEnd ({ oldIndex, newIndex }) {
     setTodos(prevItem => (arrayMoveImmutable(prevItem, oldIndex, newIndex)));
   };
@@ -135,31 +139,31 @@ function Todo({todos, setTodos, todoText, setTodoText, category, setCategory}) {
           {todos.length > 0 
             ? <SortableList 
                 todos={todos} 
-                category={category}
+                filter ={filter }
                 onSortEnd={onSortEnd}
                 handleChecked={handleChecked}
                 handleDelete={handleDelete} />
             : empty
           }
-          <li className="todos-filter">
+          <li className="todos-actions">
             <span>{todos.length} todos left</span>
 
             <ul className="filters">
-              <li onClick={(e) => handleCategory(e.target)} className="filter selected-filter">all</li>
-              <li onClick={(e) => handleCategory(e.target)} className="filter">active</li>
-              <li onClick={(e) => handleCategory(e.target)} className="filter">completed</li>
+              <li onClick={(e) => handleChosenFilter(e.target)} className="filter selected-filter">all</li>
+              <li onClick={(e) => handleChosenFilter(e.target)} className="filter">active</li>
+              <li onClick={(e) => handleChosenFilter(e.target)} className="filter">completed</li>
             </ul>
 
-            <span style={{cursor: "pointer"}} onClick={() => clearCompleted()}>clear completed</span>
+            <span className="clear-comp" onClick={() => clearCompleted()}>clear completed</span>
           </li>
         </ul>
     
       </div>
 
       <ul className="filters mobile">
-        <li onClick={(e) => handleCategory(e.target)} className="filter selected-filter">all</li>
-        <li onClick={(e) => handleCategory(e.target)} className="filter">active</li>
-        <li onClick={(e) => handleCategory(e.target)} className="filter">completed</li>
+        <li onClick={(e) => handleChosenFilter(e.target)} className="filter selected-filter">all</li>
+        <li onClick={(e) => handleChosenFilter(e.target)} className="filter">active</li>
+        <li onClick={(e) => handleChosenFilter(e.target)} className="filter">completed</li>
       </ul>
 
       <p className="drag">drag and drop to reorder list</p>

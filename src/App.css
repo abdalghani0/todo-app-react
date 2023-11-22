@@ -1,3 +1,9 @@
+/* 
+==============================
+CSS reset clears browser's defaults
+==============================
+*/
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -42,7 +48,13 @@ table {
 	border-spacing: 0;
 }
 
-main {
+/* 
+==============================
+	      Main styles
+==============================
+*/
+
+.app {
   font-family: 'Josefin Sans',sans-serif;
   background-color: #e4e5f1;
   height: 100vh;
@@ -56,6 +68,122 @@ h2 {
   letter-spacing: 0.3rem;
   color: white;
   margin-bottom: 1.5rem;
+}
+
+.background {
+  width: 100%;
+  object-fit: cover;
+  height: 30vh;
+}
+.todo {
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  margin-top: -175px;
+  position: relative;
+  z-index: 1;
+ }
+.todo form {
+  margin-bottom: 1rem;
+}
+
+.todo label {
+  padding: 0.7rem;
+  display: flex;
+}
+
+.todo form,
+.todo-body {
+  width: 100%;
+  background-color: white;
+  border-radius: 0.4rem;
+}
+
+.todo-body {
+  margin-bottom: 2rem;
+}
+
+.input-text {
+  border: 0;
+  outline: 0;
+  width:90%;
+}
+
+.circle {
+  border: 1px solid #cacde8;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin: 0 0.15rem;
+  margin-right: 0.6rem;
+  background-color: white;
+}
+
+.empty {
+  font-size: 2rem;
+  margin: 0.5rem 0;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.drag {
+  color: #777a92;
+  text-align: center;
+}
+
+/* 
+==============================
+	      Todos styles
+==============================
+*/
+
+.list-item{ 
+  z-index: 2;
+  width: 100%;
+  margin-bottom: 0.3rem;
+  border-bottom: 1px solid #cacde8;
+  background-color: white;
+  list-style: none;
+  border-radius: 0.4rem;
+}
+
+.list-container {
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem;
+}
+
+.checked {
+  color: #777a92;
+  text-decoration: line-through;
+}
+
+@keyframes active {
+  from{
+    transform: translateX(30px);
+    opacity: 0;
+  }
+  to{
+    transform: translateX(0);
+    opacity: 100;
+  }
+}
+
+.list-item.active {
+  animation: active 0.5s ease;
+}
+
+.list-item.deleted {
+  transform: translateX(30px);
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.list-item div {
+  display: flex;
+  align-items: center;
 }
 
 .check-box {
@@ -93,43 +221,40 @@ h2 {
   background-repeat: no-repeat;
 }
 
-.background {
-  width: 100%;
-  object-fit: cover;
-  height: 30vh;
-}
-.todo {
-  max-width: 540px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  margin-top: -175px;
-  position: relative;
-  z-index: 1;
- }
-.todo form {
-  margin-bottom: 1rem;
-}
-
-.todo label {
-  padding: 0.7rem;
-}
-
-.todo form,
-.todo-body {
-  width: 100%;
+.delete-btn {
+  cursor: pointer;
   background-color: white;
-  border-radius: 0.4rem;
+  border: 0;
 }
 
-.todo-body {
-  margin-bottom: 2rem;
+.delete-btn img{
+  width: 13px;
+  height: 13px;
 }
 
-.todos-filter {
+.delete-btn:hover {
+  background-color: white;
+}
+
+/* 
+==============================
+	    Todos Actions styles
+==============================
+*/
+
+.todos-actions {
   display: flex;
   color: #777a92;
   justify-content: space-between;
   padding: 1rem 0.7rem;
+}
+
+.clear-comp {
+  cursor: pointer;
+}
+
+.clear-comp:hover {
+  color: hsl(235, 21%, 11%);
 }
 
 .filters {
@@ -150,96 +275,15 @@ h2 {
   padding: 0.7rem 0;
 }
 
-.list-item{ 
-  z-index: 2;
-  width: 100%;
-  margin-bottom: 0.3rem;
-  border-bottom: 1px solid #cacde8;
-  background-color: white;
-  list-style: none;
-  border-radius: 0.4rem;
+.selected-filter {
+  color: #3a7bfd;
 }
 
-.list-container {
-  z-index: 3;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.7rem;
-}
-
-@keyframes active {
-  from{
-    transform: translateX(30px);
-    opacity: 0;
-  }
-  to{
-    transform: translateX(0);
-    opacity: 100;
-  }
-}
-
-.list-item.active {
-  animation: active 0.5s ease;
-}
-
-.list-item.deleted {
-  transform: translateX(30px);
-  opacity: 0;
-  transition: all 0.5s ease;
-}
-
-.list-item div {
-  display: flex;
-  align-items: center;
-}
-
- .todo label {
-  display: flex;
- }
-
-.input-text {
-  border: 0;
-  outline: 0;
-  width:90%;
-}
-
-.circle {
-  border: 1px solid #cacde8;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  margin: 0 0.15rem;
-  margin-right: 0.6rem;
-  background-color: white;
-}
-
-.delete-btn {
-  cursor: pointer;
-  background-color: white;
-  border: 0;
-}
-
-.delete-btn img{
-  width: 13px;
-  height: 13px;
-}
-
-.delete-btn:hover {
-  background-color: white;
-}
-
-.empty {
-  font-size: 2rem;
-  margin: 0.5rem 0;
-  margin-bottom: 2.5rem;
-  text-align: center;
-}
-
-.drag {
-  color: #777a92;
-  text-align: center;
-}
+/* 
+==============================
+	    Responsivity styles
+==============================
+*/
 
 @media (max-width: 500px) {
   main {
@@ -262,13 +306,4 @@ h2 {
     justify-content: center;
     gap: 1rem;
   }
-}
-
-.checked {
-  color: #777a92;
-  text-decoration: line-through;
-}
-
-.selected-filter {
-  color: #3a7bfd;
 }
