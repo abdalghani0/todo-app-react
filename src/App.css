@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap);
 /* 
 ==============================
 CSS reset clears browser's defaults
@@ -53,19 +54,39 @@ table {
 	      Main styles
 ==============================
 */
+[data-theme=light] {
+  --bg-color: #e4e5f1;
+  --bg-card: #fafafa;
+  --border-color: #cacde8;
+  --color: #484b6a;
+  --hover-color: #4d5066;
+  --caret-color: #484b6a;
+  --checked-color: #cacde8;
+}
 
-.app {
-  font-family: 'Josefin Sans',sans-serif;
-  background-color: #e4e5f1;
-  height: 100vh;
+[data-theme=dark] {
+  --bg-color: #161722;
+  --bg-card: #25273c;
+  --border-color: #484b6a;
+  --color: #d2d3db;
+  --hover-color: #4d5066;
+  --caret-color: #3a7bfd;
+  --checked-color: #777a92;
+}
+
+body {
+  font-family: 'Josefin Sans';
+  background-color: var(--bg-color);
+  min-height: 100vh;
   font-size: 1rem;
   line-height: 1.6;
+  transition: background-color 0.5s ease;
 }
 
 h2 {
-  font-size: 2.5rem;
-  font-weight: 500;
-  letter-spacing: 0.3rem;
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: 0.7rem;
   color: white;
   margin-bottom: 1.5rem;
 }
@@ -79,10 +100,21 @@ h2 {
   max-width: 540px;
   margin: 0 auto;
   padding: 0 2rem;
-  margin-top: -175px;
+  margin-top: -160px;
   position: relative;
   z-index: 1;
  }
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.theme-select {
+  cursor: pointer;
+}
+
 .todo form {
   margin-bottom: 1rem;
 }
@@ -95,8 +127,9 @@ h2 {
 .todo form,
 .todo-body {
   width: 100%;
-  background-color: white;
+  background-color: var(--bg-card);
   border-radius: 0.4rem;
+  transition: background-color 0.5s ease;
 }
 
 .todo-body {
@@ -107,23 +140,29 @@ h2 {
   border: 0;
   outline: 0;
   width:90%;
+  background-color: inherit;
+  color: var(--color);
+  font-family: 'Josefin Sans';
+  font-size: inherit;
 }
 
 .circle {
-  border: 1px solid #cacde8;
+  border: 1px solid var(--border-color);
   width: 24px;
   height: 24px;
   border-radius: 50%;
   margin: 0 0.15rem;
   margin-right: 0.6rem;
-  background-color: white;
+  background-color: var(--bg-card);
+  transition: background-color 0.5s ease;
 }
 
 .empty {
-  font-size: 2rem;
+  font-size: 1.7rem;
   margin: 0.5rem 0;
   margin-bottom: 2.5rem;
   text-align: center;
+  color: var(--color);
 }
 
 .drag {
@@ -140,9 +179,10 @@ h2 {
 .list-item{ 
   z-index: 2;
   width: 100%;
+  color: var(--color);
   margin-bottom: 0.3rem;
-  border-bottom: 1px solid #cacde8;
-  background-color: white;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-card);
   list-style: none;
   border-radius: 0.4rem;
 }
@@ -156,7 +196,7 @@ h2 {
 }
 
 .checked {
-  color: #777a92;
+  color: var( --checked-color);
   text-decoration: line-through;
 }
 
@@ -187,7 +227,7 @@ h2 {
 }
 
 .check-box {
-  border: 1px solid #cacde8;
+  border: 1px solid var(--border-color);
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -201,7 +241,6 @@ h2 {
 
 .check-box:hover {
   border-color: #3a7bfd
-  
 }
 
 .check-box:checked {
@@ -223,7 +262,7 @@ h2 {
 
 .delete-btn {
   cursor: pointer;
-  background-color: white;
+  background-color: inherit;
   border: 0;
 }
 
@@ -233,7 +272,7 @@ h2 {
 }
 
 .delete-btn:hover {
-  background-color: white;
+  background-color: inherit;
 }
 
 /* 
@@ -263,20 +302,30 @@ h2 {
   gap: 1rem;
 }
 
-.filters li:hover {
+.filter {
+  color:#777a92;
+}
+
+.filter:hover {
   color: hsl(235, 21%, 11%);
 }
 
 .filters.mobile {
   display: none;
   width: 100%;
-  background-color: white;
+  background-color: var(--bg-card);
   border-radius: 0.4rem;
   padding: 0.7rem 0;
+  transition: background-color 0.5s ease;
+  margin-bottom: 1rem;
 }
 
 .selected-filter {
   color: #3a7bfd;
+}
+
+.selected-filter:hover {
+  color:#3a7bfd
 }
 
 /* 
@@ -286,7 +335,7 @@ h2 {
 */
 
 @media (max-width: 500px) {
-  main {
+  body {
     font-size: 0.7rem;
   }
   h2 {
@@ -294,6 +343,9 @@ h2 {
   }
   input {
     font-size: 0.7rem;
+  }
+  .empty {
+    font-size: 1rem;
   }
 }
 

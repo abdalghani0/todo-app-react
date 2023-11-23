@@ -7,6 +7,7 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [todoText, setTodoText] = useState("");
   const [filter, setFilter] = useState("all");
+  const [isDark, setIsDark] = useState(false);
 
   //save todos state array in localStorage.
   useEffect(() => {
@@ -22,21 +23,26 @@ function App() {
     console.log(todosParsed, todos);
   }, []);
 
+  let theme = isDark ? "dark" : "light";
+  document.body.setAttribute("data-theme", theme);
+
   return (
     <main className="app">
-      <img className="background" src="./images/bg-desktop-light.jpg"/>
+      <img className="background" src={isDark ? "./images/bg-desktop-dark.jpg" : "./images/bg-desktop-light.jpg"} />
       <Todo 
         todos={todos}
         setTodos={setTodos}
         todoText={todoText} 
         setTodoText={setTodoText}
         filter ={filter }
-        setFilter={setFilter} />
+        setFilter={setFilter}
+        isDark={isDark}
+        setIsDark={setIsDark} />
     </main>
   );
 }
 
-function Todo({todos, setTodos, todoText, setTodoText, filter , setFilter}) {
+function Todo({todos, setTodos, todoText, setTodoText, filter , setFilter, isDark, setIsDark}) {
   const empty = 
     <div className="empty">
       <img width="50%" src="./images/take-a-bath-svgrepo-com.svg"/>
@@ -124,7 +130,10 @@ function Todo({todos, setTodos, todoText, setTodoText, filter , setFilter}) {
   return(
     <div className="todo">
       
-      <h2>TODO</h2>
+      <header className="header">
+        <h2>TODO</h2>
+        <span onClick={() => setIsDark(!isDark)} className="theme-select"><img src={isDark ? "./images/icon-moon.svg" : "./images/icon-sun.svg"} /></span>
+      </header>
 
       <form onSubmit={(e) => handleSubmit(e)}>
         <label>
