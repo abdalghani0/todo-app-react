@@ -9,12 +9,6 @@ function App() {
   const [filter, setFilter] = useState("all");
   const [isDark, setIsDark] = useState(false);
 
-  //save todos state array in localStorage.
-  useEffect(() => {
-    let todosStringified = JSON.stringify(todos);
-    localStorage.setItem("todos", todosStringified);
-  }, [todos]);
-
   //retrieve todos from the last session.
   useEffect(() => {
     let t = localStorage.getItem("todos");
@@ -22,6 +16,12 @@ function App() {
     if(todosParsed !== null && todosParsed.length > 0) setTodos(todosParsed);
     console.log(todosParsed, todos);
   }, []);
+
+  //save data in localStorage.
+  useEffect(() => {
+    let todosStringified = JSON.stringify(todos);
+    localStorage.setItem("todos", todosStringified);
+  }, [todos]);
 
   let theme = isDark ? "dark" : "light";
   document.body.setAttribute("data-theme", theme);

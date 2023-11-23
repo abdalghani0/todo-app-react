@@ -299,7 +299,7 @@ h2 {
 .filters {
   display: flex;
   cursor: pointer;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .filter {
@@ -334,7 +334,7 @@ h2 {
 ==============================
 */
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   body {
     font-size: 0.7rem;
   }
