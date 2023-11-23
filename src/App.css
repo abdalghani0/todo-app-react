@@ -144,6 +144,7 @@ h2 {
   color: var(--color);
   font-family: 'Josefin Sans';
   font-size: inherit;
+  transition: color 0.5s ease;
 }
 
 .circle {
@@ -154,7 +155,7 @@ h2 {
   margin: 0 0.15rem;
   margin-right: 0.6rem;
   background-color: var(--bg-card);
-  transition: background-color 0.5s ease;
+  transition: background-color 0.5s ease, border-color 0.5s ease;
 }
 
 .empty {
@@ -179,20 +180,21 @@ h2 {
 .list-item{ 
   z-index: 2;
   width: 100%;
-  color: var(--color);
   margin-bottom: 0.3rem;
-  border-bottom: 1px solid var(--border-color);
-  background-color: var(--bg-card);
   list-style: none;
-  border-radius: 0.4rem;
 }
 
 .list-container {
   z-index: 3;
+  border-radius: 0.4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0.7rem;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-card);
+  color: var(--color);
+  transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
 }
 
 .checked {
@@ -237,6 +239,7 @@ h2 {
   cursor: pointer;
   transition: all 0.3s;
   position: relative;
+  transition: border-color 0.5s ease;
 }
 
 .check-box:hover {
