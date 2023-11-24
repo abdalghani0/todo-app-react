@@ -35,10 +35,7 @@ function App() {
 
   return (
     <main className="app">
-      <div className="bg-container">
-        <img id="dark" className={isDark ? "background slide-left" : "background slide-right"} src="./images/bg-desktop-dark.jpg" />
-        <img className={isDark ? "background slide-right" : "background slide-left"} src= "./images/bg-desktop-light.jpg" />  
-      </div>
+      <img className="background" src={isDark ? "./images/bg-desktop-dark.jpg" : "./images/bg-desktop-light.jpg"} />
       <Todo 
         todos={todos}
         setTodos={setTodos}

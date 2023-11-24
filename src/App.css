@@ -90,18 +90,11 @@ h2 {
   color: white;
 }
 
+/*
 .bg-container {
   width: 200%;
   height: 30vh;
   display: flex;
-}
-
-#hello {
-  background-color: #c058f3;
-}
-
-#bye {
-  background-color: aqua;
 }
 
 .background {
@@ -109,7 +102,7 @@ h2 {
   object-fit: cover;
   height: 100%;
   transform: translateX(0);
-  transition: transform 1.5s ease;
+  transition: transform 1s ease;
 }
 
 .slide-left {
@@ -117,12 +110,18 @@ h2 {
 }
 
 
-#dark.slide-right {
+#light.slide-right {
   transform: translateX(0);
 }
 
 .slide-right {
   transform: translateX(-100%);
+}
+*/
+
+.background {
+  width: 100%;
+  object-fit: cover;
 }
 
 .todo {
