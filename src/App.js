@@ -26,9 +26,19 @@ function App() {
   let theme = isDark ? "dark" : "light";
   document.body.setAttribute("data-theme", theme);
 
+  /*
+    <img className={isDark ? "background slide-left" : "background slide-right"} src="./images/bg-desktop-dark.jpg" />
+    <img className={isDark ? "background slide-right" : "background slide-left"} src= "./images/bg-desktop-light.jpg" />
+    <p id="hello" className={isDark ? "background slide-left" : "background slide-right"}>hello</p>
+    <p id="bye" className={isDark ? "background slide-right" : "background slide-left"}>bye</p>
+  */
+
   return (
     <main className="app">
-      <img className="background" src={isDark ? "./images/bg-desktop-dark.jpg" : "./images/bg-desktop-light.jpg"} />
+      <div className="bg-container">
+        <img id="dark" className={isDark ? "background slide-left" : "background slide-right"} src="./images/bg-desktop-dark.jpg" />
+        <img className={isDark ? "background slide-right" : "background slide-left"} src= "./images/bg-desktop-light.jpg" />  
+      </div>
       <Todo 
         todos={todos}
         setTodos={setTodos}

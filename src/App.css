@@ -88,14 +88,43 @@ h2 {
   font-weight: 700;
   letter-spacing: 0.7rem;
   color: white;
-  margin-bottom: 1.5rem;
+}
+
+.bg-container {
+  width: 200%;
+  height: 30vh;
+  display: flex;
+}
+
+#hello {
+  background-color: #c058f3;
+}
+
+#bye {
+  background-color: aqua;
 }
 
 .background {
   width: 100%;
   object-fit: cover;
-  height: 30vh;
+  height: 100%;
+  transform: translateX(0);
+  transition: transform 1.5s ease;
 }
+
+.slide-left {
+  transform: translateX(100%);
+}
+
+
+#dark.slide-right {
+  transform: translateX(0);
+}
+
+.slide-right {
+  transform: translateX(-100%);
+}
+
 .todo {
   max-width: 540px;
   margin: 0 auto;
