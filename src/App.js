@@ -3,6 +3,8 @@ import './App.css';
 import SortableList from './SortableList';
 import { arrayMoveImmutable } from 'array-move';
 
+const homepage = "https://abdalghani0.github.io/todo-app-react";
+
 function App() {
   const [todos, setTodos] = useState([]);
   const [todoText, setTodoText] = useState("");
@@ -26,16 +28,9 @@ function App() {
   let theme = isDark ? "dark" : "light";
   document.body.setAttribute("data-theme", theme);
 
-  /*
-    <img className={isDark ? "background slide-left" : "background slide-right"} src="./images/bg-desktop-dark.jpg" />
-    <img className={isDark ? "background slide-right" : "background slide-left"} src= "./images/bg-desktop-light.jpg" />
-    <p id="hello" className={isDark ? "background slide-left" : "background slide-right"}>hello</p>
-    <p id="bye" className={isDark ? "background slide-right" : "background slide-left"}>bye</p>
-  */
-
   return (
     <main className="app">
-      <img className="background" src={isDark ? "./images/bg-desktop-dark.jpg" : "./images/bg-desktop-light.jpg"} />
+      <div className="background"></div>
       <Todo 
         todos={todos}
         setTodos={setTodos}
@@ -52,7 +47,7 @@ function App() {
 function Todo({todos, setTodos, todoText, setTodoText, filter , setFilter, isDark, setIsDark}) {
   const empty = 
     <div className="empty">
-      <img width="50%" src="./images/take-a-bath-svgrepo-com.svg"/>
+      <img width="50%" src={`${homepage}/images/take-a-bath-svgrepo-com.svg`}/>
       <p>No Todos Yet</p>
     </div>;
 
@@ -117,7 +112,6 @@ function Todo({todos, setTodos, todoText, setTodoText, filter , setFilter, isDar
 
   function handleChosenFilter(el) {
     const filters = document.getElementsByClassName("filter");
-    console.log(filters);
     for(let i = 0 ; i < filters.length ; i++){
       let f = filters[i];
       if(f.innerHTML === el.innerHTML){
@@ -132,14 +126,23 @@ function Todo({todos, setTodos, todoText, setTodoText, filter , setFilter, isDar
   //function to handle sorting the dnd list levarging the array move libraray
   function onSortEnd ({ oldIndex, newIndex }) {
     setTodos(prevItem => (arrayMoveImmutable(prevItem, oldIndex, newIndex)));
-  };
+  }
+
+  function handleTheme() {
+    setIsDark(!isDark);
+    document.querySelector(".sun").classList.toggle("animate-sun");
+    document.querySelector(".moon").classList.toggle("animate-moon");
+  }
 
   return(
     <div className="todo">
       
       <header className="header">
         <h2>TODO</h2>
-        <span onClick={() => setIsDark(!isDark)} className="theme-select"><img src={isDark ? "./images/icon-moon.svg" : "./images/icon-sun.svg"} /></span>
+        <div onClick={() => handleTheme()} className="theme-select">
+          <img className="sun" src={`${homepage}/images/icon-sun.svg`} />
+          <img className="moon" src={`${homepage}/images/icon-moon.svg`} />
+        </div>
       </header>
 
       <form onSubmit={(e) => handleSubmit(e)}>
